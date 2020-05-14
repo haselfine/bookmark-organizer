@@ -7,7 +7,8 @@
             <AddBookForm v-on:book-added="bookAdded"></AddBookForm>
           </v-col>
           <v-col class="mx-auto" cols="12" md="5">
-            <Chart v-bind:fullUrl="fullUrl"></Chart>
+            <Chart v-bind:fullUrl="fullUrl"
+                  v-bind:books="books"></Chart>
           </v-col>
         </v-row>
       <v-divider></v-divider>
