@@ -79,18 +79,25 @@ export default {
     },
     updateChart(){
       let counter = 0
+      let title = ''
       this.chartData = []
       this.chartLabels = []
       for(let book of this.books){
         if(counter < 20){
             let completion = Math.round((book.pageNumber/book.totalPages) * 100)
+            if(book.title.length > 12){
+              title = book.title.substring(0,12) + '...'
+            } else {
+              title = book.title
+            }
+
             if(counter === 0){
                 this.chartData.push('chd=t:' + completion)
-                this.chartLabels.push('chxl=0:|' + book.title)
+                this.chartLabels.push('chxl=0:|' + title)
                 counter += 1
             } else {
                 this.chartData.push(',' + completion)
-                this.chartLabels.push('|' + book.title)
+                this.chartLabels.push('|' + title)
                 counter += 1
             }
         } else {
