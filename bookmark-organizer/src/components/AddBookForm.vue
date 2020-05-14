@@ -1,9 +1,9 @@
 <template>
 
     <div>
-        <div class = "col-sm-4">
+        <v-card raised>
 
-            <v-form ref="form" v-model = "valid" lazy-validation class="card book-form raised m-3 p-3">
+            <v-form ref="form" v-model="valid" lazy-validation class="card book-form p-5">
                 <h4 class="card-title">Add your books!</h4>
 
                 <v-text-field 
@@ -54,7 +54,7 @@
                     Add Book
                 </v-btn>
             </v-form>
-        </div>
+        </v-card>
     </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class = "row">
+        <div class="row">
             <BookInfo
                 v-for="book in books" v-bind:key ="book.title"
                 v-bind:book="book"

@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="col-sm">
-            <v-card class="raised m-3">
+            <v-card raised class="m-3">
                 <div class="blue darken-4">
                     <v-card-title class="justify-center white--text">
                     {{ book.title }}

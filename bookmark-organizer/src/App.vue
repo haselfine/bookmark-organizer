@@ -1,17 +1,21 @@
 <template>
   <v-app>
-    <div class = "jumbotron">Book Organizer</div>
+    <div class="jumbotron">Book Organizer</div>
     <div id="app">
-      <div>
-        <AddBookForm v-on:book-added = "bookAdded"></AddBookForm>
-        <Chart></Chart>
-      </div>
+        <v-row class="mx-9">
+          <v-col class="mx-auto" cols="12" md="5">
+            <AddBookForm v-on:book-added="bookAdded"></AddBookForm>
+          </v-col>
+          <v-col class="mx-auto" cols="12" md="5">
+            <Chart v-bind:fullUrl="fullUrl"></Chart>
+          </v-col>
+        </v-row>
       <v-divider></v-divider>
-      <div>
-        <BookList v-bind:books = "books" 
-          v-on:delete-book = "bookDeleted"
-          v-on:edit-book = "bookEdited"></BookList>
-      </div>
+        <div class="mx-9">
+          <BookList class="mx-9" v-bind:books="books" 
+            v-on:delete-book="bookDeleted"
+            v-on:edit-book="bookEdited"></BookList>
+        </div>
     </div>
   </v-app>
 </template>
@@ -30,7 +34,16 @@ export default {
   },
   data(){
     return{
-      books: []
+      books: [],
+      baseUrl: 'https://image-charts.com/chart?',
+      chartColor: 'chco=3fc6dc',
+      chartType: 'cht=bvs',
+      chartSize: 'chs=480x480',
+      chartData: [],
+      chartLabels: [],
+      fullUrl: '',
+      yAxis: 'chxs=1N**%',
+      xAxis: 'chxt=x%2Cy'
     }
   },
   mounted(){
@@ -58,11 +71,43 @@ export default {
     },
     updateBooks(){
       this.$book_api.getAllBooks().then( books => {
-          this.books = books
+        this.books = books
+          
+        this.updateChart()
       })
+    },
+    updateChart(){
+      let counter = 0
+      this.chartData = []
+      this.chartLabels = []
+      for(let book of this.books){
+        if(counter < 20){
+            let completion = Math.round((book.pageNumber/book.totalPages) * 100)
+            if(counter === 0){
+                this.chartData.push('chd=t:' + completion)
+                this.chartLabels.push('chxl=0:|' + book.title)
+                counter += 1
+            } else {
+                this.chartData.push(',' + completion)
+                this.chartLabels.push('|' + book.title)
+                counter += 1
+            }
+        } else {
+            break
+        }
+      }
+      this.fullUrl = this.baseUrl 
+          + this.chartType
+          + '&' + this.chartColor 
+          + '&' + this.chartSize 
+          + '&' + this.chartData.join('')
+          + '&' + this.chartLabels.join('')
+          + '&' + this.yAxis
+          + '&' + this.xAxis
     }
   }
 }
+
 </script>
 
 <style>
@@ -76,9 +121,8 @@ export default {
 
 .jumbotron{
   height:40px;
-  padding: 5em inherit;
   font-size: 24pt;
-  background-color: rgb(80, 155, 201) !important;
+  background-color: rgb(18, 43, 117) !important;
   color: white;
   text-align: center;
   font-size-adjust: inherit;
