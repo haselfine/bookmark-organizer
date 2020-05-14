@@ -1,3 +1,4 @@
+<!--this component essentially just holds the BookInfo component... Used to be a table holding rows-->
 <template>
     <div>
         <div class="row">

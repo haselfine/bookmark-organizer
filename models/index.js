@@ -1,3 +1,5 @@
+//configurations for sequelize database (I don't really understand the nitty gritty of what's going on here)
+
 let Sequelize = require('sequelize')
 
 let env = process.env.NODE_ENV || 'development'

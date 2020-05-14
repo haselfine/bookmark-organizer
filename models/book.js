@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => { //books have a title, author, current page, total page count, priority, and are (in)complete
     let Book = sequelize.define('Book', {
         title: {
             type: DataTypes.STRING,

@@ -1,16 +1,16 @@
 let express = require('express')
-let db = require('../models')
-let Book = db.Book
+let db = require('../models') //use models for structure of database, datatypes
+let Book = db.Book //retrieve rows from table
 
-let router = express.Router()
+let router = express.Router() //initialize express router
 
-router.get('/books', function(req, res, next){
+router.get('/books', function(req, res, next){ //retrieve all books, sort by priority
     Book.findAll( { order: ['bookPriority'] } ).then( books => {
         return res.json(books)
     }).catch( err => next(err))
 })
 
-router.post('/books', function(req, res, next){
+router.post('/books', function(req, res, next){ //create new book in api
     Book.create( req.body ).then( data => {
         return res.status(201).send(' Created.')
     }).catch( err => {
@@ -22,7 +22,7 @@ router.post('/books', function(req, res, next){
     })
 })
 
-router.patch('/books/:id', function(req, res, next){
+router.patch('/books/:id', function(req, res, next){ //update book in api by id
     Book.update( req.body, { where: { id: req.params.id } } )
         .then( rowsModified => {
             if (!rowsModified[0]){
@@ -39,7 +39,7 @@ router.patch('/books/:id', function(req, res, next){
         })
 })
 
-router.delete('/books/:id', function(req, res, next){
+router.delete('/books/:id', function(req, res, next){ //remove book from api by id
     Book.destroy( { where: { id: req.params.id } } )
         .then( rowsModified => {
             return res.send(' Deleted.')
