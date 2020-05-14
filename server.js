@@ -1,12 +1,11 @@
 let express = require('express')
 let bodyParser = require('body-parser')
+let api_routes = require('./routes/api.js')
 let path = require('path')
 
-let api_routes = require('./routes/api.js')
-
 let app = express()
-
 app.use(express.static(path.join(__dirname, 'bookmark-organizer', 'dist')))
+
 app.use(bodyParser.json())
 
 app.use('/api', api_routes)

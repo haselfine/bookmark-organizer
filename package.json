@@ -1,9 +1,13 @@
 {
     "name": "book-organizer",
     "description": "Vue and express app. Book organizer",
+    "main": "server.js",
     "author": "Ben",
     "scripts": {
         "start": "node server.js"
+    },
+    "engines": {
+        "node": "12.16.2"
     },
     "dependencies": {
         "body-parser": "^1.19.0",

@@ -1,5 +1,4 @@
 let express = require('express')
-let Sequelize = require('sequelize')
 let db = require('../models')
 let Book = db.Book
 
