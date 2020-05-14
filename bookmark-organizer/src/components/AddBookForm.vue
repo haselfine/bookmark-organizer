@@ -1,7 +1,10 @@
-<template>
+<!--This component allows the user to add a new book to their list, 
+    containing the values of the title, author, current page number,
+    total page numbers, priority-->
 
+<template>
     <div>
-        <v-card raised>
+        <v-card raised> 
 
             <v-form ref="form" v-model="valid" lazy-validation class="card book-form p-5">
                 <h4 class="card-title">Add your books!</h4>
