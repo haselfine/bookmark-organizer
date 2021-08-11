@@ -55,7 +55,7 @@ export default {
       this.$book_api.addBook(book).then( book => {
         this.updateBooks()
       }).catch(err => {
-        let msg = err.response.data.join(', ')
+        let msg = err.response
         alert('Error adding book.\n' + msg)
       })
     },
